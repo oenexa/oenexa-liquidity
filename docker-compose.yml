@@ -1,0 +1,23 @@
+# ==============================================================================
+# OENEXA Automated Liquidity & AMM Service — Standalone Stack
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  oenexa-liquidity:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oenexa-liquidity-standalone
+    ports:
+      - "8084:8084"
+    environment:
+      PORT: "8084"
+      NODE_ENV: production
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8084/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
