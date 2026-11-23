@@ -1,10 +1,13 @@
 import http from 'node:http';
 import { AmmLiquidityService } from './service/AmmLiquidityService.js';
+import { AmmDoubleEntryBridge } from './service/AmmDoubleEntryBridge.js';
 
 export * from './domain/types.js';
 export * from './service/AmmLiquidityService.js';
+export * from './service/AmmDoubleEntryBridge.js';
 
 const amm = new AmmLiquidityService();
+const ammBridge = new AmmDoubleEntryBridge();
 const PORT = Number(process.env.PORT) || 8084;
 
 export const server = http.createServer((req, res) => {
